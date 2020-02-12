@@ -107,7 +107,7 @@ async function handle_authorization_return() {
   localStorage.removeItem("next_path")
   localStorage.removeItem("pkce_state")
   localStorage.removeItem("pkce_code_verifier")
-  window.history.replaceState({}, null, "/")
+  window.history.replaceState({}, null, config.app_root)
 }
 
 const store = new Vuex.Store({
@@ -239,6 +239,7 @@ Vue.http.options.emulateJSON = true
 // Set up router first. That way the authorization return
 // can push the target path on successful authorization.
 const router = new VueRouter({
+  base: config.app_root,
   routes: [
     {path: '/', component: Index, meta: { no_auth: true }},
     {path: '/info', component: Info },
