@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>info-beamer OAuth2 + Vue.JS example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <style>
+      .right {
+        float: right;
+      }
+      .nav-bar {
+        background-color: #eee;
+        padding: 6px;
+        margin-bottom: 10px;
+      }
+      body {
+        max-width: 800px;
+        margin: auto;
+        margin-top: 10px;
+      }
+      .router-link-exact-active {
+        font-weight: bold;
+        background-color: #ccc;
+        padding: 3px 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='app'>
+      <oauth-example/>
+    </div>
+    <script>
+      window.CONFIG = {
+        client_id: "4e2b0589b577dcf817c3714c4217c174",
+        redirect_uri: "https://info-beamer.github.io/oauth-example/",
+        authorization_endpoint: "https://info-beamer.com/oauth/authorize",
+        token_endpoint: "https://info-beamer.com/oauth/token",
+        requested_scopes: "info",
+        api_root: "https://info-beamer.com/api/v1/",
+      }
+    </script>
+    <script src="vue.js"></script>
+    <script src="vuex.js"></script>
+    <script src="vue-router.js"></script>
+    <script src="vue-resource.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+
