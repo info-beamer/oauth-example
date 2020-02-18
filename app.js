@@ -67,8 +67,13 @@ async function redirect_to_authorization(next_path) {
   window.location = url
 }
 
-async function handle_authorization_return() {
+async function handle_url_params() {
   const q = parse_query_string(window.location.search.substring(1))
+
+  // Special case when info-beamer hosted redirected to this app.
+  // If we don't have an access token, initiate authorization flow.
+  if (q.source == "ib" && !localStorage.getItem('access_token'))
+    return redirect_to_authorization()
 
   // If there's no oauth 'state' parameter, there's nothing to do.
   if (!q.state)
@@ -246,9 +251,9 @@ const router = new VueRouter({
   ]
 })
 
-// Check if there's any oauth authorization parameters in
+// Check if there's any oauth relevant parameters in
 // the current url and handle them.
-await handle_authorization_return()
+await handle_url_params()
 
 // Now set up the rest of the app
 router.beforeEach(async (to, from, next) => {
